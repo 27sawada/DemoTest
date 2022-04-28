@@ -4,7 +4,9 @@ import (
 	"github.com/GoAdminGroup/go-admin/context"
 	"github.com/GoAdminGroup/go-admin/modules/db"
 	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/table"
+	"github.com/GoAdminGroup/go-admin/template/types"
 	"github.com/GoAdminGroup/go-admin/template/types/form"
+	//editType "github.com/GoAdminGroup/go-admin/template/types/table"
 )
 
 func GetUsersTable(ctx *context.Context) table.Table {
@@ -14,9 +16,24 @@ func GetUsersTable(ctx *context.Context) table.Table {
 	info := users.GetInfo().HideFilterArea()
 
 	info.AddField("Id", "id", db.Int).
-		FieldFilterable()
+		FieldFilterable().FieldSortable().SetSortAsc()
 	info.AddField("Name", "name", db.Varchar)
-	info.AddField("Gender", "gender", db.Tinyint)
+	info.AddField("Gender", "gender", db.Tinyint).FieldDisplay(func(model types.FieldModel) interface{} {
+		if model.Value == "0" {
+			return "男"
+		}
+		if model.Value == "1" {
+			return "女"
+		}
+		return "保密"
+
+		// }).FieldEditAble(editType.Switch).FieldEditOptions(types.FieldOptions{
+		// 	{Value: "0", Text: "男"},
+		// 	{Value: "1", Text: "女"},
+		// }).FieldFilterable(types.FilterType{FormType: form.SelectSingle}).FieldFilterOptions(types.FieldOptions{
+		// 	{Value: "0", Text: "men"},
+		// 	{Value: "1", Text: "women"},
+	})
 	info.AddField("City", "city", db.Varchar)
 	info.AddField("Ip", "ip", db.Varchar)
 	info.AddField("Phone", "phone", db.Varchar)

@@ -8,8 +8,11 @@ require (
 	github.com/gin-gonic/gin v1.7.7
 )
 
+require github.com/dchest/captcha v0.0.0-20200903113550-03f5f0333e1f // indirect
+
 require (
 	github.com/360EntSecGroup-Skylar/excelize v1.4.1 // indirect
+	github.com/GoAdminGroup/components v0.0.2
 	github.com/GoAdminGroup/html v0.0.1 // indirect
 	github.com/NebulousLabs/fastrand v0.0.0-20181203155948-6fb6489aac4e // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
